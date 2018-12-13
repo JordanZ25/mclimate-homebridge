@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 var exec = require('child_process').exec;
 
-fs.access('/home/mclimate-homebridge/credentials.json', (err) => {
+fs.access('credentials.json', (err) => {
     if (!err) {
 
         require('dns').resolve('www.google.com', function (err) {
@@ -10,7 +10,7 @@ fs.access('/home/mclimate-homebridge/credentials.json', (err) => {
                 console.log("No connection");
             } else {
 
-                var obj = JSON.parse(fs.readFileSync('`/home/mclimate-homebridge/credentials.json', 'utf8'));
+                var obj = JSON.parse(fs.readFileSync('`credentials.json', 'utf8'));
 
                 var access_token = 0;
                 var refresh_token = 0;
@@ -93,7 +93,7 @@ fs.access('/home/mclimate-homebridge/credentials.json', (err) => {
 
 
 
-                        fs.writeFileSync('config.json', JSON.stringify(config, null, 2));
+                        fs.writeFileSync('~/homebridge/config.json', JSON.stringify(config, null, 2));
 
 
                     })
