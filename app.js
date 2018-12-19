@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 var exec = require('child_process').exec;
 
-fs.access('credentials.json', (err) => {
+fs.access('/home/mclimate-homebridge/credentials.json', (err) => {
     if (!err) {
 
         require('dns').resolve('www.google.com', function (err) {
@@ -10,7 +10,7 @@ fs.access('credentials.json', (err) => {
                 console.log("No connection");
             } else {
 
-                var obj = JSON.parse(fs.readFileSync('`credentials.json', 'utf8'));
+                var obj = JSON.parse(fs.readFileSync('/home/mclimate-homebridge/credentials.json', 'utf8'));
 
                 var access_token = 0;
                 var refresh_token = 0;
@@ -83,7 +83,7 @@ fs.access('credentials.json', (err) => {
                                 "pin": "031-45-154"
                             },
 
-                            "description": "This is an example configuration file with one fake accessory and one fake platform. You can use this as a template for creating your own configuration file containing devices you actually own.",
+                            "description": "This is configuration file with all accessories.",
 
                             "accessories": accessories
 
@@ -91,9 +91,13 @@ fs.access('credentials.json', (err) => {
 
                         }
 
-
-
-                        fs.writeFileSync('~/homebridge/config.json', JSON.stringify(config, null, 2));
+                        fs.writeFileSync('/root/.homebridge/config.json', JSON.stringify(config, null, 2), (error) =>{
+                            if(error){
+                                console.log(error)
+                            }else{
+                            exec('homebridge', function (err, stdout, stderr) { })
+                            }
+                        } );
 
 
                     })
@@ -109,9 +113,10 @@ fs.access('credentials.json', (err) => {
 
 
 
-        exec('homebridge', function (err,stdout,stderr) {})
-    }
+        
+    }else{
     console.log('myfile does not exist');
+    }
 });
 
 
