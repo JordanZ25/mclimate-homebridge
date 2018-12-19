@@ -95,7 +95,7 @@ fs.access('/home/mclimate-homebridge/credentials.json', (err) => {
                             if(error){
                                 console.log(error)
                             }else{
-                            exec('homebridge', function (err, stdout, stderr) { })
+                            exec('pm2 start homebridge', function (err, stdout, stderr) { })
                             }
                         } );
 
