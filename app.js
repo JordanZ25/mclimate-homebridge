@@ -82,20 +82,15 @@ fs.access('/home/mclimate-homebridge/credentials.json', (err) => {
                                 "port": 51826,
                                 "pin": "031-45-154"
                             },
-
                             "description": "This is configuration file with all accessories.",
-
                             "accessories": accessories
-
-
-
                         }
 
-                        fs.writeFileSync('/root/.homebridge/config.json', JSON.stringify(config, null, 2), (error) =>{
+                        fs.writeFile('/root/.homebridge/config.json', JSON.stringify(config, null, 2), (error) =>{
                             if(error){
                                 console.log(error)
                             }else{
-                            exec('pm2 start homebridge', function (err, stdout, stderr) { })
+                                exec('pm2 start homebridge', function (err, stdout, stderr) { })
                             }
                         } );
 
