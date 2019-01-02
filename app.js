@@ -71,6 +71,19 @@ fs.access('/home/mclimate-homebridge/credentials.json', (err) => {
 
                                 })
 
+                            } else if (controller.type == 'vicki') {
+                                accessories.push({
+                                    "accessory": "MClimate-Vicki",
+                                    "name": controller.name,
+                                    "vicki_name": controller.name,
+                                    "serial_number": controller.serial_number,
+                                    "access_token": access_token,
+                                    "refresh_token": refresh_token
+
+
+
+                                })
+
                             }
 
 
@@ -90,7 +103,12 @@ fs.access('/home/mclimate-homebridge/credentials.json', (err) => {
                             if(error){
                                 console.log(error)
                             }else{
-                                exec('pm2 start homebridge', function (err, stdout, stderr) { })
+                                exec('homebridge', {env:{'PATH':'/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'}}, function (err, stdout, stderr) {
+                                    console.log(err)
+                                    console.log(stdout)
+                                    console.log(stderr)
+                                     })
+    
                             }
                         } );
 
